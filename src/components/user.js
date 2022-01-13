@@ -1,31 +1,33 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
-class User extends React.component {
-  constructor(props) {
-    super(props);
-    this.state = {//a state is a set of data that an individual component can hold
-      planet: "earth"
-    };
-    console.log("Hey I am from constructor");
-  }
-componentDidMount() {
-  this.setState({planet: "Mars"});
-  console.log("Hey I am from componentDidMount");
+//function User(props) {
+const User = (props)=>{
+  const [planet, setPlanet] = useState("earth");
+
+  //componentDidMount
+  useEffect(()=>{
+    console.log("Component mounting");
+  }, []);
+
+  //componentDidUpdate
+  useEffect(()=>{
+    console.log("planet changes");
+  }, [planet]);
+  return (
+    <div>
+      <h1>{props.name}</h1>
+      <p>{props.description}</p>
+      <button onClick={() => setPlanet("pluto")} >{planet}</button>
+    </div>
+  );
 }
-  render() {//logic
-    console.log("Hey I am from rendered");
-    return (
-      <div>
-        <h1>{this.props.name}</h1>
-        <h4>{this.props.description}</h4>
-        <h4>{this.state.planet}</h4>
-      </div>
-    );
-  }
-}
+
+
 
 
 export default User;
+
+//Hooks _> enable use of state in ur functional component - useState, useEffect
 
 //props -> properties/params, a data that is passed one component to another
 //life cycle method ->
